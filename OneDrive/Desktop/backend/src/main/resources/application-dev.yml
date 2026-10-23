@@ -1,0 +1,50 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/cc}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:Bade@123}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/cc}
+    user: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:Bade@123}
+
+jwt:
+  secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+  access-expiration: ${JWT_ACCESS_EXPIRATION:900000} # 15 minutes
+  refresh-expiration: ${JWT_REFRESH_EXPIRATION:604800000} # 7 days
+
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:8081}
+
+llm:
+  provider: ${LLM_PROVIDER:auto}
+  base-url: ${LLM_BASE_URL:https://api.openai.com/v1}
+  api-key: ${LLM_API_KEY:${OPENAI_API_KEY:}}
+  model: ${LLM_MODEL:gpt-4o-mini}
+  embedding-model: ${LLM_EMBEDDING_MODEL:text-embedding-3-small}
+  timeout-seconds: ${LLM_TIMEOUT_SECONDS:60}
+
+search:
+  provider: ${SEARCH_PROVIDER:auto}
+  tavily-api-key: ${TAVILY_API_KEY:}
+
+artifacts:
+  storage-dir: ${ARTIFACTS_STORAGE_DIR:target/artifacts}
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: INFO
+    com.example.backend: DEBUG
